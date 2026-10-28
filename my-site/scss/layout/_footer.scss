@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+footer {
+  padding: 25px 15px;
+  background-color: var(--navy);
+  color: var(--on-navy);
+  text-align: center;
+
+  h2 { margin-bottom: 5px; font-size: rem(20px); }
+  p { margin-bottom: 5px; font-size: rem(14px); }
+}

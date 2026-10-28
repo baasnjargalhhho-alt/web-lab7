@@ -1,0 +1,35 @@
+@use "../abstracts" as *;
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none; // JS-гүй бол огт харагдахгүй
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  background-color: var(--cream);
+  color: var(--rose);
+  font-weight: bold;
+  transition: opacity var(--dur-base) ease, visibility var(--dur-base);
+
+  &__ring { width: 56px; height: 56px; animation: loader-spin 0.9s linear infinite; }
+  &__text { color: var(--text); }
+}
+
+.js .loader {
+  display: grid;
+  animation: loader-failsafe 0s linear 6s forwards; // JS саатвал 6 сек дараа алга болно
+}
+
+.is-loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
+
+// stagger: --i-г script.js онооно
+.is-loaded .offer-card,
+.is-loaded .pet-card {
+  animation: card-arrive var(--dur-slow) ease backwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+@keyframes loader-spin { to { transform: rotate(360deg); } }
+@keyframes loader-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }

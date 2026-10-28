@@ -1,0 +1,27 @@
+@use "../abstracts" as *;
+
+// @each / @for-оор үүсгэсэн туслах (utility) классууд
+$aligns: ("left", "center", "right");
+$text-colors: ("muted", "rose-dark", "danger", "on-navy");
+
+@each $align in $aligns {
+  .u-text-#{$align} { text-align: $align !important; }
+}
+
+@each $name in $text-colors {
+  .u-text-#{$name} { color: var(--#{$name}) !important; }
+}
+
+@for $i from 0 through 4 {
+  .u-mt-#{$i} { margin-top: rem(8px * $i) !important; }
+  .u-mb-#{$i} { margin-bottom: rem(8px * $i) !important; }
+}
+
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

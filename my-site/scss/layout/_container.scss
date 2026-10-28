@@ -1,0 +1,28 @@
+@use "../abstracts" as *;
+
+.container {
+  flex: 1 0 auto;
+  @include container($margin: 30px auto);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 25px;
+  align-items: start;
+
+  @include respond(md) { grid-template-columns: 1fr; }
+  @include respond(sm) { width: 94%; margin: 18px auto; gap: 18px; }
+}
+
+main { min-width: 0; }
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include respond(md) {
+    display: grid;
+    @include grid-cols(2);
+    gap: 15px;
+  }
+  @include respond(sm) { display: flex; flex-direction: column; }
+}

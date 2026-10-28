@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Азтай савар — Нүүр</title>
+  <meta name="description" content="Амьтан үрчлэхийг хүссэн гэр бүлийг үрчлүүлэх амьтантай холбодог ТББ.">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    document.documentElement.className += " js";
+    /* Dark mode-ийг хуудас зурагдахаас өмнө тохируулж, анивчихаас сэргийлнэ */
+    try {
+      var saved = localStorage.getItem("theme") ||
+        (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", saved);
+    } catch (e) {}
+  </script>
+  <noscript><style>.page-panel[hidden] { display: block !important; }</style></noscript>
+</head>
+<body>
+
+  <!-- Ачаалах loader: JS ажиллаж байхад л харагдана, хуудас ачаалагдсаны дараа алга болно -->
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <svg class="loader__ring" viewBox="0 0 50 50" aria-hidden="true" focusable="false">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="90 150"/>
+    </svg>
+    <span class="loader__text">Ачаалж байна…</span>
+  </div>
+
+
+  <header>
+    <div class="logo">
+      <h1>
+        <a href="#home">
+          <!-- Inline SVG: viewBox + role="img" + <title> -->
+          <svg class="logo__icon" viewBox="0 0 64 64" role="img" aria-labelledby="logo-t">
+            <title id="logo-t">Сарвууны хээ</title>
+            <ellipse cx="32" cy="42" rx="15" ry="12" fill="currentColor"/>
+            <circle cx="13" cy="29" r="6.5" fill="currentColor"/>
+            <circle cx="25" cy="16" r="6.5" fill="currentColor"/>
+            <circle cx="39" cy="16" r="6.5" fill="currentColor"/>
+            <circle cx="51" cy="29" r="6.5" fill="currentColor"/>
+          </svg>
+          <span>Азтай савар</span>
+        </a>
+      </h1>
+      <p>Амьтанд хайртай гэр бүлийг холбоно</p>
+      <button class="theme-toggle" id="themeToggle" type="button">
+        <span aria-hidden="true" id="themeIcon">☾</span>
+        <span id="themeText">Шөнийн горим</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Үндсэн цэс">
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list">☰ Цэс</button>
+    <ul class="nav__list" id="nav-list">
+      <li><a href="#home" data-page-link="home" aria-current="page">Нүүр</a></li>
+      <li><a href="#pets" data-page-link="pets">Амьтад</a></li>
+      <li><a href="#anket" data-page-link="anket">Анкет</a></li>
+      <li><a href="#tips" data-page-link="tips">Зөвлөмж</a></li>
+      <li><a href="#contact" data-page-link="contact">Холбоо барих</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <main>
+      <div class="page-panel" id="home" data-page="home" data-title="Азтай савар — Нүүр">
+      <section class="hero">
+        <div class="hero__text">
+          <p class="hero__kicker">Хайртай гэр бүлдээ шинэ найз</p>
+          <h2>Тэжээвэр амьтанд шинэ гэр хайцгаая</h2>
+          <p>Амьтнаа сонгоод, үрчлэлтийн анкетаа бөглөөрэй.</p>
+          <a class="button" href="#anket">Анкет бөглөх</a>
+        </div>
+        <div class="hero__image" aria-hidden="true">
+          <span>🐶</span><span>🐱</span><span>🐰</span>
+        </div>
+      </section>
+
+      <section class="offers" aria-label="Үрчлэлт хэрхэн явагддаг вэ">
+        <article class="offer-card">
+          <h3>1. Амьтнаа сонгох</h3>
+          <p>Үрчлүүлэх боломжтой амьтдын жагсаалтаас өөрт тохирохыг сонгоно.</p>
+        </article>
+        <article class="offer-card">
+          <h3>2. Анкет бөглөх</h3>
+          <p>Амьдрах орчин, туршлага, хариуцлагын талаарх анкетыг үнэн зөв бөглөнө.</p>
+        </article>
+        <article class="offer-card">
+          <h3>3. Холбогдож танилцах</h3>
+          <p>Бид тантай холбогдож, амьтантай танилцуулна.</p>
+        </article>
+      </section>
+
+      <section class="pets">
+        <div class="pets__header">
+          <h2>Гэр хүлээж буй амьтад</h2>
+          <p><a class="pets__link" href="#pets">Бүх амьтдыг харах</a></p>
+        </div>
+        <div class="pets__grid">
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Бондигийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85" alt="Ногоон зүлгэн дээр сууж буй бор нохой" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Бонди</strong>
+                    <span>2 настай, нөхөрсөг нохой. Гадаа алхаж, шинэ найзтай болох дуртай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-03-14">2026.03.14</time></span>
+                      <span><b>Газар</b> Баянзүрх дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Бонди</h3>
+            <p>Нохой, 2 настай, эр</p>
+            <span class="pet-card__chip">Нөхөрсөг</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Мимигийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85" alt="Камер руу харж буй судалтай муур" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Мими</strong>
+                    <span>1 настай, дөлгөөн муур. Нам гүм орчинд тухлан хэвтэх дуртай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-05-02">2026.05.02</time></span>
+                      <span><b>Газар</b> Сүхбаатар дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Мими</h3>
+            <p>Муур, 1 настай, эм</p>
+            <span class="pet-card__chip">Тайван</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Цас туулайн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85" alt="Цагаан туулай" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Цас</strong>
+                    <span>8 сартай, сониуч туулай. Зөөлөн дэвсгэр, цэвэрхэн орчин хэрэгтэй.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-06-21">2026.06.21</time></span>
+                      <span><b>Газар</b> Хан-Уул дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Цас</h3>
+            <p>Туулай, 8 сартай, эр</p>
+            <span class="pet-card__chip">Хөөрхөн</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+        </div>
+      </section>
+
+      </div>
+
+      <div class="page-panel" id="pets" data-page="pets" data-title="Азтай савар — Амьтад" hidden>
+      <section class="page-intro">
+        <h2>Үрчлүүлэх боломжтой амьтад</h2>
+        <p>Одоогоор 6 амьтан гэр хүлээж байна.Сонирхсон амьтнаа олвол анкетаа бөглөнө үү.</p>
+      </section>
+
+      <section class="pets">
+        <div class="pets__grid">
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Бондигийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85" alt="Ногоон зүлгэн дээр сууж буй бор нохой" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Бонди</strong>
+                    <span>2 настай, нөхөрсөг нохой. Гадаа алхаж, шинэ найзтай болох дуртай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-03-14">2026.03.14</time></span>
+                      <span><b>Газар</b> Баянзүрх дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Бонди</h3>
+            <p>Нохой, 2 настай, эр</p>
+            <span class="pet-card__chip">Нөхөрсөг</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Мимигийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85" alt="Камер руу харж буй судалтай муур" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Мими</strong>
+                    <span>1 настай, дөлгөөн муур. Нам гүм орчинд тухлан хэвтэх дуртай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-05-02">2026.05.02</time></span>
+                      <span><b>Газар</b> Сүхбаатар дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Мими</h3>
+            <p>Муур, 1 настай, эм</p>
+            <span class="pet-card__chip">Тайван</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Цас туулайн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85" alt="Цагаан туулай" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Цас</strong>
+                    <span>8 сартай, сониуч туулай. Зөөлөн дэвсгэр, цэвэрхэн орчин хэрэгтэй.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-06-21">2026.06.21</time></span>
+                      <span><b>Газар</b> Хан-Уул дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Цас</h3>
+            <p>Туулай, 8 сартай, эр</p>
+            <span class="pet-card__chip">Хөөрхөн</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Лакигийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=85" alt="Хэлээ гаргасан хөгжилтэй нохой" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Лаки</strong>
+                    <span>3 настай, эрч хүчтэй нохой. Алхах, тоглох, хүмүүстэй нөхөрлөх дуртай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2025-11-08">2025.11.08</time></span>
+                      <span><b>Газар</b> Сонгинохайрхан дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Лаки</h3>
+            <p>Нохой, 3 настай, эр</p>
+            <span class="pet-card__chip">Идэвхтэй</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Сувдын картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&w=900&q=85" alt="Тайван сууж буй гэрийн муур" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Сувд</strong>
+                    <span>2 настай, эелдэг муур. Хайр халамжтай гэр бүлээ хүлээж байна.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-01-19">2026.01.19</time></span>
+                      <span><b>Газар</b> Чингэлтэй дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Сувд</h3>
+            <p>Муур, 2 настай, эм</p>
+            <span class="pet-card__chip">Эелдэг</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+          <article class="pet-card">
+            <div class="flip-card">
+              <button class="flip-card__button" type="button" aria-pressed="false" aria-label="Бөмбөөгийн картыг эргүүлэх">
+                <span class="flip-card__inner">
+                  <span class="flip-card__front">
+                    <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&w=900&q=85" alt="Жижигхэн шишүүхэй" loading="lazy" decoding="async">
+                    <span class="flip-card__hint" aria-hidden="true">↻ Эргүүлж үзэх</span>
+                  </span>
+                  <span class="flip-card__back">
+                    <strong>Бөмбөө</strong>
+                    <span>6 сартай жижигхэн амьтан. Аюулгүй тор, тоглох зай, өдөр тутмын арчилгаа шаардлагатай.</span>
+                    <span class="flip-card__meta">
+                      <span><b>Огноо</b> <time datetime="2026-08-05">2026.08.05</time></span>
+                      <span><b>Газар</b> Баянгол дүүрэг</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <span class="status status--waiting">Гэр хүлээж байна</span>
+            </div>
+            <h3>Бөмбөө</h3>
+            <p>Хулгана, 6 сартай, эр</p>
+            <span class="pet-card__chip">Жижигхэн</span><br>
+            <a class="pet-card__button" href="#anket">Анкет бөглөх</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="video-section" aria-labelledby="video-title">
+          <h2 id="video-title">Танилцуулга видео</h2>
+          <video controls playsinline preload="metadata" poster="video/poster.jpg" width="640" height="360">
+            <source src="video/clip.mp4" type="video/mp4">
+            <source src="video/clip.webm" type="video/webm">
+            <track kind="captions" src="video/clip.mn.vtt" srclang="mn" label="Монгол" default>
+            Таны хөтөч видео дэмжихгүй байна.
+          </video>
+        </section>
+
+      </div>
+
+
+      <div class="page-panel" id="anket" data-page="anket" data-title="Азтай савар — Үрчлэгчийн анкет" hidden>
+      <section class="page-intro">
+        <h2>Үрчлэгчийн анкет</h2>
+        <p>Анкет нь амьтныг хайр халамжтай, аюулгүй, хариуцлагатай гэр бүлд хүргэхэд тусална. Мэдээллийг үнэн зөв, гүйцэд бөглөнө үү.</p>
+      </section>
+
+      <p class="form-note"><span class="form-note__mark">*</span> тэмдэгтэй талбарыг заавал бөглөнө.</p>
+
+      <form id="adoptionForm" action="#" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>1. Үрчлэгчийн мэдээлэл</legend>
+            
+            <div class="field-grid">
+            <div class="field"><label for="fullname">Овог, нэр</label><input type="text" id="fullname" name="fullname" required minlength="2" placeholder="Б. Бат" autocomplete="name"></div>
+            <div class="field"><label for="register">Регистрийн дугаар</label><input type="text" id="register" name="register" required placeholder="УБ12345678" pattern="[А-ЯӨҮЁа-яөүё]{2}[0-9]{8}" title="2 кирилл үсэг, 8 тоо. Жишээ: УБ12345678"></div>
+            <div class="field"><label for="dob">Төрсөн огноо</label><input type="date" id="dob" name="dob" required autocomplete="bday"></div>
+            <div class="field"><label for="age">Нас</label><input type="number" id="age" name="age" required aria-describedby="age-hint" min="18" max="100" inputmode="numeric"><span class="field__hint" id="age-hint">18 (эсвэл 21) нас хүрсэн, эрх зүйн бүрэн чадамжтай иргэн байх шаардлагатай.</span></div>
+            <div class="field field--full"><label for="idcopy">Иргэний үнэмлэхний хуулбар хавсаргах</label><input type="file" id="idcopy" name="idcopy" required accept="image/*,.pdf"></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. Холбоо барих мэдээлэл</legend>
+            
+            <div class="field-grid">
+            <div class="field"><label for="phone">Үндсэн утасны дугаар</label><input type="tel" id="phone" name="phone" required pattern="[0-9]{8}" placeholder="88112233" inputmode="numeric" title="8 оронтой тоо оруулна уу" autocomplete="tel"></div>
+            <div class="field"><label for="email">Цахим шуудан (имэйл)</label><input type="email" id="email" name="email" required placeholder="example@gmail.com" autocomplete="email"></div>
+            <div class="field"><label for="emergency_name">Яаралтай үед холбоо барих хүний нэр</label><input type="text" id="emergency_name" name="emergency_name" required minlength="2"></div>
+            <div class="field"><label for="emergency_phone">Яаралтай үед холбоо барих хүний утас</label><input type="tel" id="emergency_phone" name="emergency_phone" required pattern="[0-9]{8}" placeholder="99112233" inputmode="numeric" title="8 оронтой тоо оруулна уу"></div>
+            <div class="field field--full"><label for="address">Гэрийн хаяг (оршин суугаа хаяг)</label><textarea id="address" name="address" rows="3" required minlength="10" autocomplete="street-address"></textarea></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. Ажил эрхлэлт ба гадаад зорчих төлөвлөгөө</legend>
+            
+            <div class="field-grid">
+            <div class="field"><label for="employment">Одоогийн ажил эрхлэлтийн байдал</label><select id="employment" name="employment" required><option value="">-- Сонгоно уу --</option><option value="private">Хувийн хэвшилд ажилладаг</option><option value="public">Төрийн албан хаагч</option><option value="selfemployed">Хувиараа бизнес эрхлэгч</option><option value="student">Оюутан</option><option value="unemployed">Ажилгүй</option></select></div>
+            <div class="field"><label for="company">Байгууллагын нэр, албан тушаал</label><input type="text" id="company" name="company"></div>
+            <div class="field"><label for="workphone">Ажлын газрын утасны дугаар</label><input type="tel" id="workphone" name="workphone" pattern="[0-9]{8}" placeholder="70112233" inputmode="numeric" title="8 оронтой тоо оруулна уу"></div>
+            <div class="field field--full" role="group" aria-labelledby="q-abroad"><p class="field__question" id="q-abroad">Ойрын 1–2 жилд гадаад улс руу урт хугацаагаар сурах, ажиллахаар явах төлөвлөгөө бий юу?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="abroad" value="yes" required> Тийм</label><label class="field__choice"><input type="radio" name="abroad" value="no" required> Үгүй</label></div></div>
+            <div class="field field--full"><label for="abroad_pet">Бий бол амьтнаа хэрхэх вэ?</label><input type="text" id="abroad_pet" name="abroad_pet"></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>4. Амьдрах орчин</legend>
+            
+            <div class="field-grid">
+            <div class="field"><label for="housing">Та ямар төрлийн орон сууцанд амьдардаг вэ?</label><select id="housing" name="housing" required><option value="">-- Сонгоно уу --</option><option value="apartment">Нийтийн байр (орон сууц)</option><option value="house">Хашаа байшин</option><option value="ger">Гэр</option><option value="other">Бусад</option></select></div>
+            <div class="field"><label for="living_with">Та гэр бүлээрээ амьдардаг уу, ганцаараа юу?</label><select id="living_with" name="living_with" required><option value="">-- Сонгоно уу --</option><option value="family">Гэр бүлээрээ</option><option value="alone">Ганцаараа</option></select></div>
+            <div class="field field--full" role="group" aria-labelledby="q-ownership"><p class="field__question" id="q-ownership">Та тухайн орон сууцны хувьд:</p><div class="field__choices"><label class="field__choice"><input type="radio" name="ownership" value="owner" required> Өмчлөгч (өөрийн байр)</label><label class="field__choice"><input type="radio" name="ownership" value="renter" required> Түрээслэгч (түрээсийн байр)</label></div></div>
+            <div class="field field--full" role="group" aria-labelledby="q-landlord"><p class="field__question" id="q-landlord">Түрээсийн байр бол байрны эзэн амьтан тэжээхийг зөвшөөрсөн үү?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="landlord" value="yes"> Тийм</label><label class="field__choice"><input type="radio" name="landlord" value="no"> Үгүй</label></div></div>
+            <div class="field"><label for="family_count">Гэр бүлийн гишүүдийн тоо</label><input type="number" id="family_count" name="family_count" required min="1" max="30" inputmode="numeric"></div>
+            <div class="field"><label for="children">Хүүхэд байгаа эсэх, байгаа бол нас</label><input type="text" id="children" name="children" placeholder="Жишээ: 2 хүүхэд, 5 ба 9 настай"></div>
+            <div class="field field--full" role="group" aria-labelledby="q-consent"><p class="field__question" id="q-consent">Гэр бүлийн бүх гишүүд амьтан үрчлэн авахыг зөвшөөрсөн үү?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="family_consent" value="yes" required> Тийм</label><label class="field__choice"><input type="radio" name="family_consent" value="no" required> Үгүй</label></div></div>
+            <div class="field field--full" role="group" aria-labelledby="q-allergy"><p class="field__question" id="q-allergy">Гэр бүлийн гишүүдийн дунд амьтны үс, шүлснээс харшилтай хүн бий юу?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="allergy" value="yes" required> Тийм</label><label class="field__choice"><input type="radio" name="allergy" value="no" required> Үгүй</label></div></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. Амьдрах орчны зураг</legend>
+            <p class="fieldset-intro">Амьтан очиж амьдрах орчин аюулгүй, тохиромжтой эсэхийг нягтлахад ашиглана.</p>
+            <div class="field-grid">
+            <div class="field field--full"><label for="photo_inside">Гэрийн доторх ерөнхий зураг (амьтан байрлах үндсэн хэсэг)</label><input type="file" id="photo_inside" name="photo_inside" required accept="image/*"></div>
+            <div class="field field--full"><label for="photo_yard">Хашаа байшин бол: хашааны үүд, хайс хамгаалалтын зураг</label><input type="file" id="photo_yard" name="photo_yard" accept="image/*"></div>
+            <div class="field field--full"><label for="photo_corner">Амьтанд зориулж бэлдсэн булан, хэвтэр, хоолны аяга (бэлдсэн бол)</label><input type="file" id="photo_corner" name="photo_corner" accept="image/*"></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>6. Амьтан тэжээж байсан туршлага</legend>
+            
+            <div class="field-grid">
+            <div class="field field--full"><label for="exp_before">Өмнө нь амьтан тэжээж байсан уу? Тийм бол ямар амьтан, хэдэн жил тэжээсэн бэ?</label><textarea id="exp_before" name="exp_before" rows="3" required></textarea></div>
+            <div class="field field--full"><label for="exp_current">Одоо танайд тэжээвэр амьтан байгаа юу? (үүлдэр, нас, хүйс, ариутгасан эсэх)</label><textarea id="exp_current" name="exp_current" rows="3" required></textarea></div>
+            <div class="field field--full"><label for="exp_past">Өмнө нь тэжээж байсан амьтан тань одоо хаана байгаа вэ? (хөгширч үхсэн, хүнд өгсөн г.м)</label><textarea id="exp_past" name="exp_past" rows="3"></textarea></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>7. Үрчлэн авахыг хүссэн амьтан</legend>
+            
+            <div class="field-grid">
+            <div class="field field--full" role="group" aria-labelledby="q-pettype"><p class="field__question" id="q-pettype">Та ямар амьтан үрчлэхийг хүсэж байна вэ?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="pet_type" value="dog" required> Нохой</label><label class="field__choice"><input type="radio" name="pet_type" value="cat" required> Муур</label><label class="field__choice"><input type="radio" name="pet_type" value="other" required> Бусад</label></div></div>
+            <div class="field"><label for="pet_other_text">Бусад бол ямар амьтан вэ?</label><input type="text" id="pet_other_text" name="pet_other_text"></div>
+            <div class="field"><label for="pet_details">Нас, хүйс, үүлдэр (тодорхой амьтан бол нэр)</label><input type="text" id="pet_details" name="pet_details" required></div>
+            <div class="field field--full" role="group" aria-labelledby="q-purpose"><p class="field__question" id="q-purpose">Та ямар зорилгоор амьтан үрчлэн авч байна вэ?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="purpose" value="companion" required> Хань болох, гэр бүлийн гишүүн</label><label class="field__choice"><input type="radio" name="purpose" value="guard" required> Харуул хамгаалалт</label><label class="field__choice"><input type="radio" name="purpose" value="for_child" required> Хүүхдэдээ авч өгөх</label><label class="field__choice"><input type="radio" name="purpose" value="other" required> Бусад</label></div></div>
+            <div class="field field--full" role="group" aria-labelledby="q-place"><p class="field__question" id="q-place">Та амьтныг хаана байлгах вэ? (олон сонголт хийж болно)</p><div class="field__choices"><label class="field__choice"><input type="checkbox" name="place" value="inside"> Гэрт дотор</label><label class="field__choice"><input type="checkbox" name="place" value="yard_tied"> Хашаанд (уяатай)</label><label class="field__choice"><input type="checkbox" name="place" value="yard_free"> Хашаанд (уяагүй)</label><label class="field__choice"><input type="checkbox" name="place" value="outside_door"> Гэрийн гадна үүдэнд</label></div></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>8. Асран хамгаалах хариуцлага</legend>
+            
+            <div class="field-grid">
+            <div class="field field--full"><label for="hours_alone">Амьтныг өдөрт хэдэн цаг ганцааранг нь үлдээх вэ? (цаг)</label><input type="number" id="hours_alone" name="hours_alone" required min="0" max="24" inputmode="numeric"></div>
+            <div class="field field--full"><label for="travel_plan">Аялал зугаалгаар явах эсвэл хөдөө орон нутаг руу яаралтай явах бол амьтнаа хаана үлдээх вэ?</label><textarea id="travel_plan" name="travel_plan" rows="3" required minlength="5"></textarea></div>
+            <div class="field field--full" role="group" aria-labelledby="q-followup"><p class="field__question" id="q-followup">Үрчлүүлсэн байгууллага таныг амьтнаа хэрхэн тэжээж байгааг лавлах, зураг бичлэг ирүүлэхийг шаардвал зөвшөөрөх үү?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="followup" value="yes" required> Тийм</label><label class="field__choice"><input type="radio" name="followup" value="no" required> Үгүй</label></div></div>
+            <div class="field field--full" role="group" aria-labelledby="q-future"><p class="field__question" id="q-future">Таны амьдралд өөрчлөлт гарсан ч (гэрлэлт, хүүхэд төрөх, нүүх г.м) амьтнаа хаяхгүй, хариуцлагатай тэжээж чадах уу?</p><div class="field__choices"><label class="field__choice"><input type="radio" name="future" value="yes" required> Тийм</label><label class="field__choice"><input type="radio" name="future" value="no" required> Үгүй</label></div></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>9. Баталгаажуулалт</legend>
+            
+            <div class="field-grid">
+            <div class="field field--full"><label class="field__choice" for="confirm"><input type="checkbox" id="confirm" name="confirm" value="yes" required> Дээрх мэдээллийг үнэн зөв бөглөсөн болно.</label></div>
+            <div class="field"><label for="filled_date">Анкет бөглөсөн огноо</label><input type="date" id="filled_date" name="filled_date" required></div>
+            <div class="field"><label for="signature">Үрчлэгчийн гарын үсэг (бүтэн нэрээ бичнэ үү)</label><input type="text" id="signature" name="signature" required minlength="2"></div>
+            </div>
+          </fieldset>
+
+        <div class="form-actions">
+          <button class="button" type="submit">Анкет илгээх</button>
+          <button class="button button--outline" type="reset">Талбаруудыг цэвэрлэх</button>
+        </div>
+
+        <div id="successMessage" class="notice" role="status" hidden>
+          <strong>Анкет амжилттай илгээгдлээ</strong>
+          <p>Таны оруулсан мэдээллийг хүлээн авлаа.</p>
+          <button class="notice__close" type="button" aria-label="Хаах">&times;</button>
+        </div>
+      </form>
+
+      </div>
+
+      <div class="page-panel" id="tips" data-page="tips" data-title="Азтай савар — Зөвлөмж" hidden>
+      <section class="page-intro">
+        <h2>Үрчлэлтийн зөвлөмж</h2>
+        <p>Амьтан авчрахаасаа өмнө бэлтгэх зүйл, вакцины хуваарь, хамтдаа хийх арга хэмжээний мэдээлэл.</p>
+      </section>
+
+      <section class="info-section">
+        <h2>Үрчлэхээсээ өмнө</h2>
+        <div class="offers">
+          <article class="offer-card">
+            <h3>Цаг гаргах</h3>
+            <p>Хооллох, тоглох, салхилуулах болон асрахад өдөр бүр тогтмол цаг гаргана.</p>
+          </article>
+          <article class="offer-card">
+            <h3>Зардлаа тооцох</h3>
+            <p>Хоол хүнс, вакцин, эмчилгээ болон бусад хэрэгцээний зардлыг урьдчилан төлөвлөнө.</p>
+          </article>
+          <article class="offer-card">
+            <h3>Орчноо бэлтгэх</h3>
+            <p>Амьтан аюулгүй, цэвэр, тухтай орчинд амьдрах нөхцөлийг урьдчилан бүрдүүлнэ.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h2>Вакцин ба эмчийн үзлэг</h2>
+        <p>Доорх хуваарь нь ерөнхий жишээ юм. Яг тохирох хугацааг малын эмчээс лавлана уу.</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Гөлөг, зулзагын вакцин ба үзлэгийн хуваарь</caption>
+            <thead>
+              <tr>
+                <th scope="col">Насны хугацаа</th>
+                <th scope="col">Амьтан</th>
+                <th scope="col">Хийх зүйл</th>
+                <th scope="col">Дараагийн үзлэг</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Насны хугацаа">6–8 долоо хоног</td>
+                <td data-label="Амьтан">Нохой</td>
+                <td data-label="Хийх зүйл">Анхны цогц вакцин, туулга</td>
+                <td data-label="Дараагийн үзлэг">21 хоногийн дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">10–12 долоо хоног</td>
+                <td data-label="Амьтан">Нохой</td>
+                <td data-label="Хийх зүйл">Хоёр дахь цогц вакцин</td>
+                <td data-label="Дараагийн үзлэг">21 хоногийн дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">12–16 долоо хоног</td>
+                <td data-label="Амьтан">Нохой</td>
+                <td data-label="Хийх зүйл">Галзуугийн вакцин, гурав дахь цогц вакцин</td>
+                <td data-label="Дараагийн үзлэг">12 сарын дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">8 долоо хоног</td>
+                <td data-label="Амьтан">Муур</td>
+                <td data-label="Хийх зүйл">Анхны цогц вакцин, туулга</td>
+                <td data-label="Дараагийн үзлэг">28 хоногийн дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">12 долоо хоног</td>
+                <td data-label="Амьтан">Муур</td>
+                <td data-label="Хийх зүйл">Хоёр дахь цогц вакцин</td>
+                <td data-label="Дараагийн үзлэг">28 хоногийн дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">16 долоо хоног</td>
+                <td data-label="Амьтан">Муур</td>
+                <td data-label="Хийх зүйл">Галзуугийн вакцин, гурав дахь цогц вакцин</td>
+                <td data-label="Дараагийн үзлэг">12 сарын дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">6 сар</td>
+                <td data-label="Амьтан">Нохой, муур</td>
+                <td data-label="Хийх зүйл">Эрүүл мэндийн үзлэг, ариутгалын зөвлөгөө</td>
+                <td data-label="Дараагийн үзлэг">6 сарын дараа</td>
+              </tr>
+              <tr>
+                <td data-label="Насны хугацаа">Жил бүр</td>
+                <td data-label="Амьтан">Нохой, муур</td>
+                <td data-label="Хийх зүйл">Давтан вакцин, ерөнхий үзлэг, туулга</td>
+                <td data-label="Дараагийн үзлэг">12 сарын дараа</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h2>Хамтдаа хийх арга хэмжээ</h2>
+        <p>Зохион байгуулж болох санаанууд. Амьтны эрүүл мэнд, нас, зан төлөвт тохируулж, аюулгүй орчинд зохион байгуулна.</p>
+        <ul class="event-list">
+          <li><strong>Авьяас ба сургалтын өдөр</strong>Суух, дуудахад ирэх зэрэг сурсан үйлдлээ эзэнтэйгээ хамт үзүүлнэ. Амьтныг хүчлэхгүй, урамшуулалаар дэмжинэ.</li>
+          <li><strong>Хамгийн хөөрхөн зураг</strong>Амьтны зураг, богино танилцуулгыг оролцуулж, үрчлүүлэх амьтдын тухай эерэг мэдээлэл түгээнэ.</li>
+          <li><strong>Эрүүл алхалтын өдөр</strong>Нохойгоо оосортой салхилуулах, ус авч явах, бусад амьтантай аюулгүй зай барих дадлыг дэмжинэ.</li>
+        </ul>
+        <p><strong>Зохион байгуулахдаа санах зүйл</strong></p>
+        <ul class="check-list">
+          <li>Амьтныг айлгах, ядраах, хүчээр оролцуулахгүй.</li>
+          <li>Цэвэр ус, сүүдэр, тайван амрах зай бэлдэнэ.</li>
+          <li>Ялагч тодруулахдаа амьтны сайн сайхныг нэгдүгээрт тавина.</li>
+        </ul>
+      </section>
+
+      <section class="info-section">
+        <h2>Сургалт, сайн дурын ажил</h2>
+        <p>Нохой, муурны зан төлөв ба сургалт, эрүүл мэнд, вакцин, хаягдсан амьтныг аврах сайн дурын ажлын талаар сонирхвол бидэнтэй биечлэн уулзаарай.</p>
+        <a class="button button--outline" href="#contact">Холбоо барих</a>
+      </section>
+
+      </div>
+
+      <div class="page-panel" id="contact" data-page="contact" data-title="Азтай савар — Холбоо барих" hidden>
+      <section class="page-intro">
+        <h2>Холбоо барих</h2>
+        <p>Үрчлэлтийн талаар асуух зүйл, санал хүсэлт байвал доорх мэдээллээр холбогдоорой.</p>
+      </section>
+
+      <section class="info-section">
+        <div class="offers">
+          <article class="offer-card">
+            <h3>Утас</h3>
+            <p><a href="tel:+97695178033">9517-8033</a></p>
+          </article>
+          <article class="offer-card">
+            <h3>Цахим шуудан</h3>
+            <p><a href="mailto:aztaisavar@gmail.com">aztaisavar@gmail.com</a></p>
+          </article>
+          <article class="offer-card">
+            <h3>Ажиллах цаг</h3>
+            <p>Өдөр бүр 10:00–18:00</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h2>Амьтан үрчлэхээр шийдсэн үү?</h2>
+        <p>Анкетаа шууд бөглөж болно.</p>
+        <a class="button" href="#anket">Анкет бөглөх</a>
+      </section>
+
+      <section class="info-section" aria-labelledby="map-title">
+        <h2 id="map-title">Манай байршил</h2>
+        <!-- Аюулгүй iframe: title, sandbox, loading, referrerpolicy -->
+        <iframe class="map-frame"
+          title="Улаанбаатар хотын газрын зураг"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=106.80%2C47.88%2C107.05%2C47.96&amp;layer=mapnik"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          width="640" height="320"></iframe>
+      </section>
+
+      </div>
+    </main>
+
+    <aside>
+      <section class="sidebar-card">
+        <h2>Азтай савар гэж юу вэ?</h2>
+        <p>Тэжээвэр амьтан үрчлэхийг хүссэн хүмүүсийг мэдээллээр хангаж, үрчлүүлэх амьтантай нь холбодог ТББ.</p>
+      </section>
+      <section class="sidebar-card">
+        <h2>Сануулах нь</h2>
+        <p>Амьтан үрчлэх нь олон жилийн хариуцлага. Шийдвэрээ гэр бүлийнхэнтэйгээ ярилцаж гаргаарай.</p>
+      </section>
+      <section class="sidebar-card about-card" aria-labelledby="about-title">
+        <h2 id="about-title">Бидний тухай</h2>
+        <p>Азтай савар ТББ нь амьтан бүрт хайртай гэр бүл олж өгөхийг зорьдог.</p>
+        <ul class="about-card__list">
+          <li><span class="about-card__label">Хаяг</span>Улаанбаатар хот</li>
+          <li><span class="about-card__label">Утас</span><a href="tel:+97695178033">9517-8033</a></li>
+          <li><span class="about-card__label">Цахим шуудан</span><a href="mailto:aztaisavar@gmail.com">aztaisavar@gmail.com</a></li>
+          <li><span class="about-card__label">Ажиллах цаг</span>Өдөр бүр 10:00–18:00</li>
+        </ul>
+        <a class="button button--outline" href="#contact">Холбоо барих</a>
+      </section>
+    </aside>
+
+  </div>
+
+  <footer>
+    <h2>Азтай савар ТББ</h2>
+    <p>Амьтан бүрт хайртай гэр бүл хэрэгтэй.</p>
+    <p>© 2026 Азтай савар</p>
+  </footer>
+
+
+  <script>
+    (function () {
+      "use strict";
+
+      var nav = document.querySelector("nav.nav");
+      var toggle = nav.querySelector(".nav__toggle");
+      var panels = Array.prototype.slice.call(document.querySelectorAll(".page-panel"));
+      var links = Array.prototype.slice.call(nav.querySelectorAll("[data-page-link]"));
+      var names = panels.map(function (p) { return p.dataset.page; });
+
+      
+      function setMenu(open) {
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.textContent = open ? "\u2715 Хаах" : "\u2630 Цэс";
+      }
+
+      toggle.addEventListener("click", function () {
+        setMenu(!nav.classList.contains("is-open"));
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && nav.classList.contains("is-open")) {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+
+      var wide = window.matchMedia("(min-width: 601px)");
+      var onChange = function (e) { if (e.matches) { setMenu(false); } };
+      if (wide.addEventListener) { wide.addEventListener("change", onChange); }
+      else if (wide.addListener) { wide.addListener(onChange); }
+
+      function showPage(name) {
+        if (names.indexOf(name) === -1) { name = "home"; }
+
+        panels.forEach(function (panel) {
+          panel.hidden = panel.dataset.page !== name;
+          if (!panel.hidden) { document.title = panel.dataset.title; }
+        });
+
+        links.forEach(function (link) {
+          if (link.dataset.pageLink === name) { link.setAttribute("aria-current", "page"); }
+          else { link.removeAttribute("aria-current"); }
+        });
+
+        setMenu(false);
+        window.scrollTo(0, 0);
+      }
+
+      document.addEventListener("click", function (event) {
+        var a = event.target.closest('a[href^="#"]');
+        if (!a) { return; }
+        var name = a.getAttribute("href").slice(1);
+        if (names.indexOf(name) === -1) { return; }
+        event.preventDefault();
+        if (window.location.hash !== "#" + name) { history.pushState(null, "", "#" + name); }
+        showPage(name);
+      });
+
+      window.addEventListener("hashchange", function () {
+        showPage(window.location.hash.slice(1));
+      });
+
+      showPage(window.location.hash.slice(1));
+
+    
+      var form = document.getElementById("adoptionForm");
+      var success = document.getElementById("successMessage");
+      var closeButton = success.querySelector(".notice__close");
+      var dateField = document.getElementById("filled_date");
+
+      function setToday() {
+        if (dateField.value) { return; }
+        var t = new Date();
+        var m = String(t.getMonth() + 1).padStart(2, "0");
+        var d = String(t.getDate()).padStart(2, "0");
+        dateField.value = t.getFullYear() + "-" + m + "-" + d;
+      }
+      setToday();
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        success.hidden = false;
+        success.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      form.addEventListener("reset", function () {
+        success.hidden = true;
+        setTimeout(setToday, 0);
+      });
+
+      closeButton.addEventListener("click", function () { success.hidden = true; });
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+@use "sass:list";
+@use "sass:map";
+@use "tokens" as t;
+
+// @include respond(md) { ... }  ->  @media (max-width: 900px)
+@mixin respond($bp) {
+  @if not map.has-key(t.$breakpoints, $bp) {
+    @error "Үл мэдэгдэх breakpoint `#{$bp}`. Боломжит: #{map.keys(t.$breakpoints)}";
+  }
+  @media (max-width: map.get(t.$breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Төвлөрүүлсэн flex (давтагдсан 3 мөрийг орлоно)
+@mixin flex-center($inline: false, $gap: null) {
+  @if $inline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+  justify-content: center;
+  align-items: center;
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+@mixin grid-cols($n) {
+  grid-template-columns: repeat($n, minmax(0, 1fr));
+}
+
+@mixin container($width: 90%, $margin: auto) {
+  width: $width;
+  max-width: t.$container-max;
+  margin: $margin;
+}
+
+// transition: <prop> var(--dur-<speed>) ease, ...
+@mixin transition($props, $speed: "fast") {
+  $list: ();
+  @each $p in $props {
+    $list: list.append($list, #{$p} var(--dur-#{$speed}) ease, comma);
+  }
+  transition: $list;
+}

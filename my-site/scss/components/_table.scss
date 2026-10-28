@@ -1,0 +1,51 @@
+@use "../abstracts" as *;
+
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+
+  @include respond(sm) { overflow-x: visible; }
+}
+
+table { width: 100%; border-collapse: collapse; }
+caption { padding-bottom: 10px; text-align: left; font-weight: bold; color: var(--ink); }
+th { padding: 12px 14px; background-color: var(--navy); color: var(--on-navy); text-align: left; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--line); }
+tbody tr:nth-child(even) { background-color: var(--blush-light); }
+
+// Утсан дээр хүснэгт карт болж хувирна
+@include respond(sm) {
+  table, tbody, tr, td { display: block; width: 100%; }
+  caption { display: block; }
+  thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  tr {
+    margin-bottom: 12px;
+    padding: 4px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+  }
+  tbody tr:nth-child(even) { background-color: var(--surface); }
+  td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--line);
+    text-align: right;
+  }
+  td:last-child { border-bottom: 0; }
+  td::before {
+    content: attr(data-label);
+    flex: 0 0 38%;
+    color: var(--muted);
+    font-weight: bold;
+    text-align: left;
+  }
+}

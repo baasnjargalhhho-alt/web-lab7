@@ -1,0 +1,16 @@
+{
+  "name": "aztai-savar",
+  "version": "1.0.0",
+  "description": "Азтай савар — Лаб 7: Sass/SCSS refactor",
+  "scripts": {
+    "dev": "sass --watch --source-map scss/main.scss:css/style.css",
+    "build": "sass --style=compressed --source-map scss/main.scss:css/style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.105.2"
+  },
+  "private": true
+}

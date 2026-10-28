@@ -1,0 +1,30 @@
+@use "../abstracts" as *;
+
+.pets {
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: var(--radius-lg);
+  background-color: var(--navy);
+  color: var(--on-navy);
+
+  &__header {
+    margin-bottom: 25px;
+    text-align: center;
+
+    h2 { margin-bottom: 5px; }
+    p { margin-bottom: 0; color: var(--on-navy-muted); }
+  }
+
+  &__link { color: var(--on-navy); font-weight: bold; }
+
+  &__grid {
+    display: grid;
+    @include grid-cols(3);
+    gap: 15px;
+
+    @include respond(md) { @include grid-cols(2); }
+    @include respond(sm) { grid-template-columns: 1fr; }
+  }
+
+  @include respond(sm) { padding: 16px; }
+}

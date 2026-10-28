@@ -1,0 +1,16 @@
+@use "../abstracts" as *;
+
+:root {
+  @each $name, $value in $colors-light {
+    --#{$name}: #{$value};
+  }
+  @each $name, $value in $radii {
+    --radius-#{$name}: #{$value};
+  }
+  @each $name, $value in $durations {
+    --dur-#{$name}: #{$value};
+  }
+  --flip-duration: 750ms;
+  --stagger-step: 100ms; // stagger: картуудын хоорондох саатал
+  color-scheme: light;
+}

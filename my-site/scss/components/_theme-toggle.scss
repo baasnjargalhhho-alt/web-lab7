@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--on-navy);
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+  @include transition((background-color, transform));
+
+  &:hover { background: rgba(255, 255, 255, 0.22); transform: translateY(-2px); }
+
+  @include respond(sm) { display: flex; margin: 12px auto 0; }
+}

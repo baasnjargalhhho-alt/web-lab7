@@ -1,0 +1,93 @@
+@use "functions" as fn;
+
+$navy: #0a184f;
+$rose-soft: #f0b5d0;
+$container-max: 1200px;
+
+// Light горимын өнгө, сүүдэр (:root-д custom property болно)
+$colors-light: (
+  "navy": $navy,
+  "cream": #fefdfb,
+  "blush": #f9e5eb,
+  "blush-light": #f0d7df,
+  "rose": #b83f75,
+  "rose-dark": #ab2943,
+  "rose-soft": $rose-soft,
+  "rose-mid": #e9a7c3,
+  "line": #ead1dc,
+  "text": #111b3d,
+  "muted": #4d5470,
+  "field-border": #8b92ad,
+  "danger": #a63a2b,
+  "surface": #ffffff,
+  "surface-soft": #fff7fa,
+  "input-bg": #ffffff,
+  "ink": $navy,
+  "on-soft": fn.contrast($rose-soft),
+  "back-from": $navy,
+  "back-to": #243b76,
+  "glow": rgba(249, 229, 235, 0.48),
+  "shadow": 0 10px 22px rgba(10, 24, 79, 0.18),
+  "shadow-soft": 0 12px 30px rgba(10, 24, 79, 0.09),
+  "on-navy": fn.contrast($navy),
+  "on-navy-muted": #eadce8,
+  "media-bg": #000000,
+  "ok-bg": #e3f6ea,
+  "ok-text": #14532d,
+  "adopted-bg": #ebe9f5,
+  "adopted-text": #3b3f66
+);
+
+// Dark горимд зөвхөн өөрчлөгдөх утгууд
+$colors-dark: (
+  "navy": #1c2b7a,
+  "cream": #0b1020,
+  "surface": #141b33,
+  "blush": #1d2748,
+  "surface-soft": #1d2748,
+  "blush-light": #26325c,
+  "input-bg": #0d1328,
+  "line": #3b4a7a,
+  "text": #f1f3fb,
+  "ink": #f1f3fb,
+  "muted": #b9c0dc,
+  "rose": #c94a85,
+  "rose-dark": #ff9cc3,
+  "field-border": #8e9bc8,
+  "danger": #ff9b8a,
+  "back-from": #8a3270,
+  "back-to": #4a2a86,
+  "glow": rgba(201, 74, 133, 0.14),
+  "shadow": 0 10px 22px rgba(0, 0, 0, 0.55),
+  "shadow-soft": 0 12px 30px rgba(0, 0, 0, 0.4),
+  "ok-bg": #123524,
+  "ok-text": #9be7b8,
+  "adopted-bg": #2a2f55,
+  "adopted-text": #d3d7f5
+);
+
+$radii: (
+  "sm": 10px,
+  "md": 14px,
+  "lg": 20px,
+  "pill": 999px
+);
+
+$durations: (
+  "fast": 0.2s,
+  "base": 0.3s,
+  "img": 0.5s,
+  "slow": 0.65s
+);
+
+$breakpoints: (
+  "sm": 600px,
+  "md": 900px,
+  "lg": 1000px
+);
+
+// Амьтны төлөв: нэр -> (дэвсгэр токен, текст токен)
+$statuses: (
+  "waiting": ("ok-bg", "ok-text"),
+  "adopted": ("adopted-bg", "adopted-text")
+);

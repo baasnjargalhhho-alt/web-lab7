@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+// Dark mode: хуудас < карт < дотоод самбар гэсэн 3 түвшин
+html[data-theme="dark"] {
+  @each $name, $value in $colors-dark {
+    --#{$name}: #{$value};
+  }
+  color-scheme: dark;
+
+  .field input,
+  .field select,
+  .field textarea { background-color: var(--input-bg); }
+
+  .nav__list a[aria-current="page"] { background-color: var(--rose); color: var(--on-navy); }
+
+  .pets,
+  .pet-card,
+  .info-section { border: 1px solid var(--line); }
+}

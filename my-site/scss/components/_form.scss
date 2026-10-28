@@ -1,0 +1,142 @@
+@use "../abstracts" as *;
+
+.form-note {
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: rem(14px);
+
+  &__mark { color: var(--danger); font-weight: bold; }
+}
+
+form fieldset {
+  min-width: 0;
+  margin: 0 0 20px;
+  padding: 20px 22px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+
+  @include respond(sm) { padding: 16px 12px 4px; }
+}
+
+form legend {
+  max-width: 100%;
+  padding: 6px 14px;
+  border-radius: var(--radius-lg);
+  background-color: var(--navy);
+  color: var(--on-navy);
+  font-weight: bold;
+}
+
+.fieldset-intro { margin-bottom: 14px; color: var(--muted); font-size: rem(14px); }
+
+.field-grid {
+  display: grid;
+  @include grid-cols(2);
+  gap: 0 20px;
+
+  @include respond(sm) { grid-template-columns: 1fr; }
+}
+
+.field {
+  min-width: 0;
+  margin-bottom: 16px;
+
+  &--full { grid-column: 1 / -1; }
+
+  label,
+  .field__question { display: block; margin: 0 0 6px; font-weight: bold; }
+
+  > label:has(+ :required)::after,
+  &[role="group"]:has(:required) > .field__question::after {
+    content: " *";
+    color: var(--danger);
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="file"],
+  select,
+  textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 2px solid var(--field-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface);
+    color: var(--text);
+    font: inherit;
+  }
+
+  input[type="file"] { padding: 8px; }
+  textarea { min-height: 90px; resize: vertical; }
+  input:focus,
+  select:focus,
+  textarea:focus { border-color: var(--rose); }
+
+  &__hint { display: block; margin-top: 4px; color: var(--muted); font-size: rem(14px); }
+
+  &__choices { display: flex; flex-wrap: wrap; gap: 0 22px; }
+
+  // .field label (0,1,1)-ээс давуу байхын тулд .field дотор бичив
+  .field__choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}
+
+.field__choice input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--rose);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @include respond(sm) {
+    flex-direction: column;
+    .button { width: 100%; }
+  }
+}
+
+.notice {
+  position: relative;
+  margin-top: 20px;
+  padding: 16px 46px 16px 18px;
+  border-left: 6px solid var(--rose);
+  border-radius: 0 14px 14px 0;
+  background-color: var(--blush);
+
+  strong { display: block; }
+  p { margin: 2px 0 0; }
+
+  &__close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--ink);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}

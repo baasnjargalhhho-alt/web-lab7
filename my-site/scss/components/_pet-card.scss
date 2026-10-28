@@ -1,0 +1,89 @@
+@use "../abstracts" as *;
+
+.pet-card {
+  min-width: 0;
+  padding: 15px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  color: var(--ink);
+  text-align: center;
+  @include transition((transform, box-shadow, background-color, color));
+
+  h3 { margin-bottom: 4px; }
+  p { margin-bottom: 8px; color: var(--muted); font-size: rem(14px); }
+
+  &__chip {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: var(--radius-md);
+    background-color: var(--blush);
+    color: var(--rose-dark);
+    font-size: rem(13px);
+    font-weight: bold;
+  }
+
+  &__button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 18px;
+    border-radius: var(--radius-lg);
+    background-color: var(--rose-soft);
+    color: var(--on-soft);
+    font-weight: bold;
+    text-decoration: none;
+    @include transition((transform, box-shadow, background-color, color));
+
+    &:hover { background-color: var(--navy); color: var(--on-navy); }
+    &:hover,
+    &:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); }
+  }
+
+  &:hover,
+  &:focus-within { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+  // Үрчлэгдсэн амьтанд анкетийн товч харуулахгүй
+  &:has(.status--adopted) &__button { display: none; }
+
+  // pet-card доторх flip-card
+  .flip-card {
+    position: relative;
+    min-height: 260px;
+    margin-bottom: 14px;
+    animation: none; // stagger-ийг pet-card өөрөө хийнэ
+  }
+  .flip-card__button,
+  .flip-card__inner { min-height: 260px; }
+  .flip-card__front,
+  .flip-card__back { border-radius: var(--radius-md); }
+  .flip-card__front img { height: 100%; flex: 1 1 auto; }
+  .flip-card__hint {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 3px 10px;
+    border-radius: var(--radius-md);
+    background: var(--navy);
+    color: var(--on-navy);
+    font-size: .78rem;
+  }
+  .flip-card__back {
+    padding: 14px 16px;
+    gap: 6px;
+    text-align: left;
+
+    strong { font-size: 1.05rem; }
+    > span { font-size: .84rem; line-height: 1.4; }
+  }
+
+  &:hover .flip-card__front img,
+  &:focus-within .flip-card__front img { transform: scale(1.06); }
+}
+
+.pets .pet-card :focus-visible { outline-color: var(--rose); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-card__button:hover,
+  .pet-card__button:focus-visible,
+  .pet-card:hover,
+  .pet-card:focus-within { transform: none; }
+}

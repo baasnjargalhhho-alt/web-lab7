@@ -1,0 +1,31 @@
+@use "../abstracts" as *;
+
+.button {
+  display: inline-block;
+  padding: 11px 22px;
+  border: 2px solid var(--rose);
+  border-radius: var(--radius-lg);
+  background-color: var(--rose);
+  color: var(--on-navy);
+  font: bold 1rem Arial, Helvetica, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  @include transition((transform, box-shadow, background-color, color));
+
+  &:hover {
+    background-color: var(--navy);
+    border-color: var(--navy);
+    color: var(--on-navy);
+  }
+
+  &--outline { background-color: transparent; color: var(--rose-dark); }
+
+  &:hover,
+  &:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .button:focus-visible { transform: none; }
+}

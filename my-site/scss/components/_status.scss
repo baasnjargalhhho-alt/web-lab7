@@ -1,0 +1,35 @@
+@use "sass:list";
+@use "../abstracts" as *;
+
+.status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: bold;
+  line-height: 1.5;
+  pointer-events: none; // хулгана картад хүрэхэд саад болохгүй
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  // --waiting, --adopted -г @each-ээр үүсгэнэ
+  @each $name, $tokens in $statuses {
+    &--#{$name} {
+      background: var(--#{list.nth($tokens, 1)});
+      color: var(--#{list.nth($tokens, 2)});
+    }
+  }
+}

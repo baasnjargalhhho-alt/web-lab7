@@ -1,0 +1,27 @@
+// main.scss — зөвхөн @use. Дараалал нь cascade-д чухал.
+@use "base/root";
+@use "base/reset";
+
+@use "layout/header";
+@use "layout/nav";
+@use "layout/container";
+
+@use "components/button";
+@use "components/theme-toggle";
+@use "components/hero";
+@use "components/offers";
+@use "components/flip-card";
+@use "components/status";
+@use "components/pets";
+@use "components/pet-card"; // flip-card-аас ДАРАА: .pet-card доторх override-ууд
+@use "components/page-intro";
+@use "components/info-section";
+@use "components/table";
+@use "components/form";
+@use "components/sidebar";
+@use "components/loader";
+
+@use "layout/footer";
+@use "themes/dark";
+@use "base/motion";
+@use "utilities/utilities";

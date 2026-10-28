@@ -1,0 +1,61 @@
+@use "../abstracts" as *;
+
+.info-section {
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+
+  > h2 { margin-bottom: 8px; font-size: rem(22px); }
+  > p { max-width: 70ch; }
+  > .offers { margin-bottom: 0; }
+  > *:last-child { margin-bottom: 0; }
+
+  @include respond(sm) { padding: 16px; }
+}
+
+.event-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+
+  li { padding-left: 14px; border-left: 4px solid var(--rose); }
+  strong { display: block; }
+}
+
+.check-list {
+  margin: 0;
+  padding-left: 22px;
+
+  li { margin-bottom: 6px; }
+}
+
+.video-section {
+  margin-top: 24px;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+
+  video {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-md);
+    background-color: var(--media-bg);
+  }
+}
+
+.map-frame {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  background-color: var(--blush);
+
+  @include respond(sm) { height: 260px; }
+}

@@ -1,0 +1,72 @@
+@use "../abstracts" as *;
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: var(--blush);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  &__list {
+    @include container($margin: auto);
+    padding: 12px 0;
+    list-style: none;
+    @include flex-center($gap: 15px);
+    flex-wrap: wrap;
+
+    a {
+      display: block;
+      padding: 8px 16px;
+      color: var(--ink);
+      text-decoration: none;
+      border-radius: var(--radius-lg);
+      font-weight: bold;
+      @include transition((transform, box-shadow, background-color, color));
+    }
+    a:hover { background-color: var(--rose-mid); color: var(--on-soft); }
+    a[aria-current="page"] { background-color: var(--navy); color: var(--on-navy); }
+    a:hover,
+    a:focus-visible { transform: translateY(-2px); }
+
+    @include respond(md) {
+      gap: 8px;
+      a { padding: 8px 12px; }
+    }
+
+    @include respond(sm) {
+      width: 94%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 6px 0 12px;
+      a { padding: 12px; text-align: center; }
+    }
+  }
+
+  &__toggle { display: none; }
+
+  @include respond(sm) {
+    .js &__toggle {
+      @include flex-center($gap: 10px);
+      width: 94%;
+      min-height: 46px;
+      margin: 8px auto;
+      padding: 10px 16px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-lg);
+      background-color: var(--surface);
+      color: var(--ink);
+      font: bold 1rem Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
+    .js &__list { display: none; }
+    .js &.is-open &__list { display: flex; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__list a:hover,
+  .nav__list a:focus-visible { transform: none; }
+}
